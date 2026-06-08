@@ -6,16 +6,18 @@ export function ClickCounter() {
   const [count, setCount] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
 
+  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
   useEffect(() => {
-    fetch("/api/clicks")
+    fetch(`${base}/api/clicks`)
       .then((r) => r.json())
       .then((d) => setCount(d.count))
       .catch(() => setCount(-1));
-  }, []);
+  }, [base]);
 
   async function handleClick() {
     setLoading(true);
-    const res = await fetch("/api/clicks", { method: "POST" });
+    const res = await fetch(`${base}/api/clicks`, { method: "POST" });
     const data = await res.json();
     setCount(data.count);
     setLoading(false);
