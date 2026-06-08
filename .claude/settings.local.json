@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack)",
-      "WebFetch(domain:docs.webflow.com)"
+      "WebFetch(domain:docs.webflow.com)",
+      "WebSearch",
+      "Bash(npm run *)"
     ]
   }
 }

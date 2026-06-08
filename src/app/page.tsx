@@ -1,3 +1,5 @@
+import { ClickCounter } from "@/components/ClickCounter";
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white flex flex-col items-center justify-center p-8">
@@ -29,6 +31,8 @@ export default function Home() {
             <Row label="Build" value={process.env.NODE_ENV ?? "unknown"} />
           </div>
         </div>
+
+        <ClickCounter />
 
         <p className="text-slate-600 text-xs font-mono">
           {new Date().toISOString()}
