@@ -9,7 +9,8 @@ export function ClickCounter() {
   useEffect(() => {
     fetch("/api/clicks")
       .then((r) => r.json())
-      .then((d) => setCount(d.count));
+      .then((d) => setCount(d.count))
+      .catch(() => setCount(-1));
   }, []);
 
   async function handleClick() {
@@ -26,9 +27,11 @@ export function ClickCounter() {
         Webflow Cloud SQLite
       </p>
       <p className="text-5xl font-bold text-emerald-400">
-        {count === null ? "..." : count}
+        {count === null ? "..." : count === -1 ? "err" : count}
       </p>
-      <p className="text-sm text-slate-400">кліків збережено в D1</p>
+      <p className="text-sm text-slate-400">
+        {count === -1 ? "помилка API" : "кліків збережено в D1"}
+      </p>
       <button
         onClick={handleClick}
         disabled={loading}

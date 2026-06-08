@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 let localCount = 0;
 
 async function getDB() {
