@@ -6,7 +6,7 @@ export function ClickCounter() {
   const [count, setCount] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  const base = "/app";
 
   useEffect(() => {
     fetch(`${base}/api/clicks`)
@@ -17,10 +17,15 @@ export function ClickCounter() {
 
   async function handleClick() {
     setLoading(true);
-    const res = await fetch(`${base}/api/clicks`, { method: "POST" });
-    const data = await res.json();
-    setCount(data.count);
-    setLoading(false);
+    try {
+      const res = await fetch(`${base}/api/clicks`, { method: "POST" });
+      const data = await res.json();
+      setCount(data.count);
+    } catch {
+      setCount(-1);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
